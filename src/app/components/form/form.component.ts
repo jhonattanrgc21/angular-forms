@@ -11,11 +11,27 @@ export class FormComponent implements OnInit {
   form!: FormGroup;
 
   get textField(){
-    return this.form.get('text')?.value;
+    return this.form.get('text');
   }
 
   get emailField(){
-    return this.form.get('email')?.value;
+    return this.form.get('email');
+  }
+
+  get nameField(){
+    return this.form.get('name');
+  }
+
+  get dateField(){
+    return this.form.get('date');
+  }
+
+  get categoryField(){
+    return this.form.get('category');
+  }
+
+  get genderField(){
+    return this.form.get('gender');
   }
 
   constructor(private _formBuilder: FormBuilder) {
@@ -54,6 +70,10 @@ export class FormComponent implements OnInit {
 
   doSomething() {
     console.log('click');
+  }
+
+  isInvalid(field: string): boolean | null |undefined{
+    return this.form.get(field)?.errors && this.form.get(field)?.touched;
   }
 
 }

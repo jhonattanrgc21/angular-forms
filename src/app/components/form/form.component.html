@@ -1,46 +1,90 @@
-
 <!-- El atributo noValidate en la etiqueta form se utiliza para apagar las validaciones nativas de HTML-->
-<form [formGroup]="form" novalidate  (ngSubmit)="save($event)">
+<form [formGroup]="form" novalidate (ngSubmit)="save($event)">
+  <!-- Nombre Inicio -->
   <p>
-    Name: <br/>
+    Name: <br />
     <input type="text" formControlName="name">
   </p>
+  <div *ngIf="this.isInvalid('name')">
+    <p *ngIf="this.form.get('name')?.hasError('required')">
+      Es un campo requerido
+    </p>
+  </div>
+  <!-- Nombre Fin -->
+
+  <!-- Fecha Inicio -->
   <p>
-    Fecha: <br/>
+    Fecha: <br />
     <input type="date" formControlName="date">
   </p>
+  <div *ngIf="this.isInvalid('date')">
+    <p *ngIf="dateField?.hasError('required')">
+      Es un campo requerido
+    </p>
+  </div>
+  <!-- Fecha Fin -->
+
+  <!-- Correo Inicio -->
   <p>
-    Email: <br/>
+    Email: <br />
     <input type="email" formControlName="email">
   </p>
+  <div *ngIf="this.isInvalid('email')">
+    <p *ngIf="emailField?.hasError('required')">
+      Es un campo requerido
+    </p>
+    <p *ngIf="emailField?.hasError('email')">
+      Es un email es invalido
+    </p>
+  </div>
+  <!-- Correo Fin -->
+
+  <!-- Texto largo Inicio -->
   <p>
-    Texto largo: <br/>
-  <textarea cols="30" rows="10" formControlName="text"></textarea>
-  <small>{{ this.textField?.value.length }}/80</small>
-</p>
-<div *ngIf="textField?.errors && textField?.touched">
-  <p *ngIf="textField?.hasError('required')">
-    Es un campo requerido
+    Texto largo: <br />
+    <textarea cols="30" rows="10" formControlName="text"></textarea>
+    <small>{{ this.textField?.value?.length }}/80</small>
   </p>
-  <p *ngIf="textField?.hasError('maxlength')">
-    Te pasaste, máximo deben haber 80 caracteres.
-  </p>
-</div>
+  <div *ngIf="this.isInvalid('text')">
+    <p *ngIf="textField?.hasError('required')">
+      Es un campo requerido
+    </p>
+    <p *ngIf="textField?.hasError('maxlength')">
+      Te pasaste, máximo deben haber 80 caracteres.
+    </p>
+  </div>
+  <!-- Texto largo Fin -->
+
+  <!-- Categoria Inicio -->
   <p>
-    Category: <br/>
+    Category: <br />
     <select formControlName="category">
       <option value="1">Category 1</option>
       <option value="2">Category 2</option>
       <option value="3">Category 3</option>
     </select>
   </p>
+  <div *ngIf="this.isInvalid('category')">
+    <p *ngIf="categoryField?.hasError('required')">
+      Es un campo requerido
+  </div>
+  <!-- Categoria Fin -->
+
+  <!-- Genero Inicio -->
   <p>
-    Genero: <br/>
+    Genero: <br />
     <input type="radio" name="gender" formControlName="gender" value="male"> Male<br>
     <input type="radio" name="gender" formControlName="gender" value="female"> Female<br>
     <input type="radio" name="gender" formControlName="gender" value="other"> Other
   </p>
-  <!-- Al agregar un boton en el formulario se le debe colocar el tipo Button para evitar que haga submit (Excepto los que si son para enviar informacion)-->
+  <div *ngIf="this.isInvalid('gender')">
+    <p *ngIf="genderField?.hasError('required')">
+      Es un campo requerido
+  </div>
+  <!-- Genero Fin -->
+
+  <!-- Al agregar un boton en el formulario se le debe colocar el tipo Button
+    para evitar que haga submit (Excepto los que si son para enviar informacion)-->
   <button type="button" (click)="doSomething()">Action</button>
   <button type="submit">Guardar</button>
 </form>
