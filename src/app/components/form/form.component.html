@@ -83,6 +83,19 @@
   </div>
   <!-- Genero Fin -->
 
+    <!-- Nombre Inicio -->
+    <!-- COn la libreria ngx-mask se pueden agregar validaciones para los inputs de tipo texto -->
+    <p>
+      Porcentage: <br />
+      <input type="text" formControlName="porcentage" mask="separator.2" thousandSeparator="." separatorLimit="99" [allowNegativeNumbers]="false" onlyPositive>
+    </p>
+    <div *ngIf="this.isInvalid('porcentage')">
+      <p *ngIf="this.form.get('porcentage')?.hasError('required')">
+        Es un campo requerido
+      </p>
+    </div>
+    <!-- Nombre Fin -->
+
   <!-- Al agregar un boton en el formulario se le debe colocar el tipo Button
     para evitar que haga submit (Excepto los que si son para enviar informacion)-->
   <button type="button" (click)="doSomething()">Action</button>

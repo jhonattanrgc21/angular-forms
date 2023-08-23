@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
 
@@ -43,13 +43,15 @@ export class FormComponent implements OnInit {
   }
 
   private buildForm() {
+    // Si el campo tiene una sola validacion, se recomienda no usar los corchetes
     this.form = this._formBuilder.group({
-      name: ['',  [Validators.required]],
-      date: ['', [Validators.required]],
+      name: ['',  Validators.required],
+      date: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       text: ['', [Validators.required, Validators.maxLength(80)]],
-      category: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
+      category: ['', Validators.required],
+      gender: ['', Validators.required],
+      porcentage: ['', Validators.required],
     });
 
     this.form.valueChanges
