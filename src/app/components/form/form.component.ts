@@ -42,6 +42,25 @@ export class FormComponent implements OnInit {
 	ngOnInit() {
 	}
 
+	onNumberInput(event: Event) {
+		const input = event.target as HTMLInputElement;
+
+		// Elimina cualquier carácter que no sea un dígito
+		let sanitizedValue = input.value.replace(/[^\d]/g, '');
+
+		// Actualiza el valor del input
+		input.value = sanitizedValue;
+
+		// Actualiza el valor del control del formulario
+		const control = this.form.get(input.getAttribute('formControlName'));
+		if (control) {
+		  control.setValue(sanitizedValue, { emitEvent: false });
+		  control.updateValueAndValidity();
+		}
+	  }
+
+
+
 	private buildForm() {
 		// Si el campo tiene una sola validacion, se recomienda no usar los corchetes
 		this.form = this._formBuilder.group({
